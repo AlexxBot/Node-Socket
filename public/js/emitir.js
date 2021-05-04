@@ -23,7 +23,8 @@ function loadFail() {
 }
 function viewVideo(video, context) {
     context.drawImage(video, 0, 0, context.width, context.height);
-    socket.emit('data', canvas.toDataURL('image/webp'));
+    console.log("se esta emitiendo video desde el emitir.js")
+    socket.emit('stream', canvas.toDataURL('image/webp'));
 }
 $(function () {
     console.log("se inicio la funcion de transmision")
@@ -48,8 +49,8 @@ $(function () {
       } */
 
     /* setTimeout(function () {
-    console.log("interval");
-    viewVideo(video, context);
+        console.log("interval");
+        viewVideo(video, context);
 
     //drawing code: worked perfectly with setInterval
 
@@ -58,5 +59,5 @@ $(function () {
     setInterval(function () {
         console.log("interval");
         viewVideo(video, context);
-    }, 1000/60);
+    }, 100);
 });

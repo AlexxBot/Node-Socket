@@ -12,7 +12,7 @@ socket.on('disconnect', function () {
     $("#logger").text("desconectado desde cliente");
 });
 
-socket.on('data', function (image) {
+socket.on('stream', function (image) {
     
     console.log("aqui se deberia asignar la imagen")
     img.src = image;
