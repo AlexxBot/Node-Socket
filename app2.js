@@ -1,20 +1,25 @@
 const app = require('express')();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+    cors: {
+        origins: ['http://localhost:4200']
+    }
+});
 var  cors = require('cors');
 
 const documents = [];
 
 app.set('port', process.env.PORT || 3000);
 
-/* var corsOptions = {
+var corsOptions = {
     origin: 'http://localhost:4200',
-    optionsSuccessStatus: 200 // For legacy browser support
+    credentials: true,
+    //optionsSuccessStatus: 200 // For legacy browser support
 }
- */
-//app.use(cors(corsOptions));
 
-app.use(function (req, res, next) {
+app.use(cors(corsOptions));
+
+/* app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -27,11 +32,11 @@ app.use(function (req, res, next) {
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Credentials', false);
 
     // Pass to next layer of middleware
     next();
-});
+}); */
 
 
 io.on("connection", socket => {
